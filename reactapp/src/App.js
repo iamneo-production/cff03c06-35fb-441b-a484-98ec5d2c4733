@@ -16,9 +16,7 @@ import Admindashboard from './components/Admindashboard';
 function App() {
   return (
     <div className='App'>
-    
-    
-      <Routes>
+    <Routes>
       <Route path="/" element={<Home/>} />
       <Route path="/user/signup" element={<Signup/>} />
       <Route path="/user/login" element={<Login/>} />
