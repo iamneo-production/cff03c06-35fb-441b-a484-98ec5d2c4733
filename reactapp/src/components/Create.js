@@ -2,7 +2,6 @@ import React from 'react';
 import {useFormik} from 'formik';
 import axios from "axios";
 import {Formik,Form,Field,ErrorMessage} from 'formik';
-import {useNavigate} from 'react-router-dom';
 import * as yup from 'yup';
 import "yup-phone";
 import YupPassword from 'yup-password';
@@ -12,7 +11,6 @@ YupPassword(yup)
 
 function Create() 
    {
-        const navigate=useNavigate();
     let initialValues={
         selectoption:'',
             name:'',
@@ -47,7 +45,7 @@ function Create()
         phonenumber: values.phonenumber
      }
     
-        axios.post('https://8080-ecbbbeafcabcebdaccefabecfebdafaced.examlyiopb.examly.io/user/signup',data1).then(
+        axios.post('https://627110ca6a36d4d62c20b1ab.mockapi.io/users',data1).then(
           (response)=>{
               console.log(response);
             }).catch((error)=>{
@@ -83,45 +81,41 @@ onSubmitProps.resetForm()
         </div>
        <br/>
        <div>
-           <Field type='email' name='email'  placeholder="Enter email" id="email"/>
+           <Field type='email' name='email'  placeholder="Enter email"/>
             <ErrorMessage name='email'>
             {email=><div style={{color:'red'}}>{email}</div>}
                 </ErrorMessage>
         </div>
         <br/>
         <div>
-            <Field type='text'  name='name' placeholder="Enter Username" id="username"/>
+            <Field type='text'  name='name' placeholder="Enter Username"/>
             <ErrorMessage name='name'>
                 {name=><div style={{color:'red'}}>{name}</div>}
                 </ErrorMessage>
         </div>
         <br/>
         <div>
-            <Field type='number' name='phonenumber' placeholder="Enter Mobilenumber" id="mobileNumber"/>
+            <Field type='number' name='phonenumber' placeholder="Enter Mobilenumber"/>
             <ErrorMessage name='phonenumber'>
             {phonenumber=><div style={{color:'red'}}>{phonenumber}</div>}
                 </ErrorMessage>
         </div>
        <br/>
         <div>
-           <Field type='password' name='password' placeholder='Enter Password' id="password"/>
+           <Field type='password' name='password' placeholder='Enter Password'/>
             <ErrorMessage name='password'>
             {password=><div style={{color:'red'}}>{password}</div>}
                 </ErrorMessage>
         </div>
         <br/>
         <div>
-            <Field type='password' name='cpassword' placeholder='Enter Confirm Password' id="confirmPassword"/>
+            <Field type='password' name='cpassword' placeholder='Enter Confirm Password'/>
             <ErrorMessage name='cpassword'>
             {cpassword=><div style={{color:'red'}}>{cpassword}</div>}
                 </ErrorMessage>
         </div>
         <br/>
-       <button type='submit' className="btn btn-primary" id="submitButton">SUBMIT</button>
-       <p>
-           Already a user?
-       <button type="button" id='siginLink' className="btn btn-link"  onClick={() => { navigate("/user/login") }}>Login</button>
-       </p>
+       <button type='submit' className="btn btn-primary">SUBMIT</button>
        
 </Form>
 </Formik>

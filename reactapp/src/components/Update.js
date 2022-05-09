@@ -1,8 +1,8 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import {useFormik} from 'formik';
 import axios from "axios";
+import { useParams } from 'react-router-dom';
 import {Formik,Form,Field,ErrorMessage} from 'formik';
-import {useNavigate} from 'react-router-dom';
 import * as yup from 'yup';
 import "yup-phone";
 import YupPassword from 'yup-password';
@@ -10,19 +10,25 @@ import '../App.css';
 YupPassword(yup)
 
 
-function Create() 
-   {
-        const navigate=useNavigate();
-    let initialValues={
+function Update() 
+{
+
+  
+const {id}=useParams();
+ 
+let initialValues={
+    selectoption:'',
+        name:'',
+        email:'',
         selectoption:'',
-            name:'',
-            email:'',
-            selectoption:'',
-            phonenumber:'',
-            password:'',
-            cpassword:''
-           
-        }
+        phonenumber:'',
+        password:'',
+        cpassword:''
+       
+    }
+
+
+    
         let validationSchema=yup.object(
         
                 {
@@ -39,25 +45,19 @@ function Create()
             )
  let onSubmit=async(values,onSubmitProps)=>{
    
-    const data1={
+    let data1={
         selectoption:values.selectoption,
         name:values.name ,
         email: values.email,
         password: values.password,
         phonenumber: values.phonenumber
      }
+
+     axios.put(`https://627110ca6a36d4d62c20b1ab.mockapi.io/users/${id}`,data1);
     
-        axios.post('https://8080-ecbbbeafcabcebdaccefabecfebdafaced.examlyiopb.examly.io/user/signup',data1).then(
-          (response)=>{
-              console.log(response);
-            }).catch((error)=>{
-            console.log(error);
-            });
-           
 console.log(values);
 onSubmitProps.resetForm()
 }
-
   return (
       <div className='bgimage'>
         <br/>
@@ -83,45 +83,41 @@ onSubmitProps.resetForm()
         </div>
        <br/>
        <div>
-           <Field type='email' name='email'  placeholder="Enter email" id="email"/>
+           <Field type='email' name='email'  placeholder="Enter email"/>
             <ErrorMessage name='email'>
             {email=><div style={{color:'red'}}>{email}</div>}
                 </ErrorMessage>
         </div>
         <br/>
         <div>
-            <Field type='text'  name='name' placeholder="Enter Username" id="username"/>
+            <Field type='text'  name='name' placeholder="Enter Username"/>
             <ErrorMessage name='name'>
                 {name=><div style={{color:'red'}}>{name}</div>}
                 </ErrorMessage>
         </div>
         <br/>
         <div>
-            <Field type='number' name='phonenumber' placeholder="Enter Mobilenumber" id="mobileNumber"/>
+            <Field type='number' name='phonenumber' placeholder="Enter Mobilenumber"/>
             <ErrorMessage name='phonenumber'>
             {phonenumber=><div style={{color:'red'}}>{phonenumber}</div>}
                 </ErrorMessage>
         </div>
        <br/>
         <div>
-           <Field type='password' name='password' placeholder='Enter Password' id="password"/>
+           <Field type='password' name='password' placeholder='Enter Password'/>
             <ErrorMessage name='password'>
             {password=><div style={{color:'red'}}>{password}</div>}
                 </ErrorMessage>
         </div>
         <br/>
         <div>
-            <Field type='password' name='cpassword' placeholder='Enter Confirm Password' id="confirmPassword"/>
+            <Field type='password' name='cpassword' placeholder='Enter Confirm Password'/>
             <ErrorMessage name='cpassword'>
             {cpassword=><div style={{color:'red'}}>{cpassword}</div>}
                 </ErrorMessage>
         </div>
         <br/>
-       <button type='submit' className="btn btn-primary" id="submitButton">SUBMIT</button>
-       <p>
-           Already a user?
-       <button type="button" id='siginLink' className="btn btn-link"  onClick={() => { navigate("/user/login") }}>Login</button>
-       </p>
+       <button type='submit' className="btn btn-primary">UPDATE</button>
        
 </Form>
 </Formik>
@@ -132,4 +128,4 @@ onSubmitProps.resetForm()
   );
 
   }
-export default Create;
+export default Update;

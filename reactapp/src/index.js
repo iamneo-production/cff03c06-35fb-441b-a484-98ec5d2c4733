@@ -4,6 +4,7 @@ import './index.css';
 import { BrowserRouter,useNavigate } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
   <React.StrictMode>
